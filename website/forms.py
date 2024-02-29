@@ -1,15 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Record
 
 # token for git 
 # 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
-
-git clone https://username:ghp_tokenstring@github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
-cd YOUR-REPOSITORY
-
-git clone https://Sevenwings26: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@github.com/Sevenwings26/CRM_Django.git
-
 
 
 class SignUpForm(UserCreationForm):
@@ -42,3 +37,19 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].label = ''
         self.fields['password2'].help_text='<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
         
+        
+
+# create add_record forms 
+class AddRecordForm(forms.ModelForm):
+    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="")
+    last_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Last Name", "class":"form-control"}), label="")
+    email = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Email", "class":"form-control"}), label="")
+    phone = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Phone number", "class":"form-control"}), label="")
+    address = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Address", "class":"form-control"}), label="")
+    city = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"City", "class":"form-control"}), label="")
+    state =forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"State", "class":"form-control"}), label="")
+    zipcode =forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Zipcode", "class":"form-control"}), label="")
+    
+    class Meta:
+        model = Record
+        exclude = ("user", )
